@@ -5,6 +5,9 @@ node_modules/
 
 .asset-tools/
 
+# GitHub Pages 构建产物（由 scripts/build-pages.mjs 生成，只进 gh-pages 分支）
+.pages-dist/
+
 .env
 .env.*
 !.env.example

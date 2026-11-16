@@ -1,0 +1,45 @@
+name: 静态预览（GitHub Pages）
+
+# main 的 public/ 一变就重建 gh-pages，避免静态站与源码脱节。
+# 只推分支、不改 Pages 设置：万一构建失败，线上的旧版本还在，不会整站挂掉。
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'public/**'
+      - 'scripts/build-pages.mjs'
+      - '.github/workflows/pages.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: pages-static
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: 生成相对路径静态副本
+        run: node scripts/build-pages.mjs
+
+      - name: 推送到 gh-pages
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          cd .pages-dist
+          git init -b gh-pages -q
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -q -m "静态预览：由 ${GITHUB_SHA:0:7} 自动构建"
+          git push -f "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" gh-pages
