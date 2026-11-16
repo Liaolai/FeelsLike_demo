@@ -8,6 +8,33 @@
 
 `npm test` 验证后端规则与数据边界；`npm run build` 打包为可部署的 Cloudflare Worker（全部资源内嵌，离线空间数据约 2 MB）。
 
+## 在线访问
+
+| 入口 | 地址 | 能力 |
+|---|---|---|
+| 静态预览 | https://liaolai.github.io/FeelsLike_demo/ | 三维场景、人物与路线、天气与体感计算。打开即用，无冷启动 |
+| 仓库与发布包 | https://github.com/Liaolai/FeelsLike_demo | 源码、文档、`v14plus-20261116` 分发包 |
+
+静态预览是纯前端：`/api/*` 不存在，健康 AI 建议与 SSE 实时推送不可用，页面会自动降级为前端直连 Open-Meteo 轮询。
+
+## 部署
+
+### GitHub Pages（静态预览，已自动同步）
+
+`.github/workflows/pages.yml` 在 `public/**` 或 `scripts/build-pages.mjs` 变化时，自动生成相对路径副本并推送到 `gh-pages` 分支。Pages 源固定指向 `gh-pages`，因此构建失败时线上仍是上一版，不会整站挂掉。
+
+改完 `public/` 无需任何手动操作。本地复现构建：`node scripts/build-pages.mjs`，产物在 `.pages-dist/`（已 gitignore）。
+
+源码使用根路径绝对引用（`/assets/...`），而 Pages 项目页在子路径 `/<repo>/` 下，所以构建期必须相对化——这一步只发生在构建产物里，不影响本地运行与 Render 部署。
+
+### Render（完整功能，含健康 AI）
+
+仓库内 `render.yaml` 已备好：Render 控制台 New → Blueprint → 选择本仓库即可。
+
+服务绑定 `0.0.0.0` 并读取 `process.env.PORT`（已处理）。健康 AI 依赖 `DEEPSEEK_API_KEY`，在控制台环境变量中填写；不填也能正常启动，此时 `/api/health-advice` 返回 503 `not_configured`，其余功能不受影响。
+
+免费实例 15 分钟无访问会休眠，冷启动约 30–60 秒。
+
 ## 主要功能
 
 - 真实 OSM 路网、西湖多边形及岛屿、真实 Copernicus DSM 地形、OSM 建筑轮廓。
