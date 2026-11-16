@@ -1,0 +1,79 @@
+{
+  "paths": [
+    {
+      "from": "bridge",
+      "to": "autumn",
+      "routeNodes": 27,
+      "frames": 3331,
+      "meters": 932.6675518972678,
+      "blocked": null,
+      "arrived": true
+    },
+    {
+      "from": "autumn",
+      "to": "bridge",
+      "routeNodes": 27,
+      "frames": 3331,
+      "meters": 932.6675518972702,
+      "blocked": null,
+      "arrived": true
+    }
+  ],
+  "manual": [
+    {
+      "kind": "phone",
+      "frames": 216,
+      "meters": 864,
+      "finished": true,
+      "failure": null
+    },
+    {
+      "kind": "keyboard",
+      "frames": 3082,
+      "meters": 862.9599999999418,
+      "finished": true,
+      "failure": null
+    }
+  ],
+  "landing": {
+    "nodeId": 762,
+    "heading": -0.6392401260361731
+  },
+  "axisBlocked": [],
+  "clearances": {
+    "meshes": 793,
+    "openings": 3091
+  },
+  "targets": {
+    "bridge": {
+      "nodeId": 762,
+      "position": [
+        11.817274333348283,
+        0.28157105276288596,
+        -35.49159899999346
+      ],
+      "anchor": [
+        12.934470000016347,
+        0,
+        -37.656773000001124
+      ],
+      "distanceM": 97.45648963865753,
+      "component": 725
+    },
+    "autumn": {
+      "nodeId": 14648,
+      "position": [
+        -1.2529590000011126,
+        0.15514730030386992,
+        -17.312486399993585
+      ],
+      "anchor": [
+        -0.932669999974109,
+        0,
+        -17.260165999995166
+      ],
+      "distanceM": 12.95081773760475,
+      "component": 725
+    }
+  }
+}

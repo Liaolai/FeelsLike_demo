@@ -1,0 +1,8 @@
+{
+  "version": "v14",
+  "commit_sha": "6feb6551627f27c4d1c55a1c92e6ae65faa719f5",
+  "public_preview_url": "https://westlake-climate-fieldlab.dreamystingray4.chatgpt.site/",
+  "created_at": "2026-11-16T13:40:32+08:00",
+  "scope": "complete tracked current fusion source, data, models and dist build",
+  "last_tests_passed": 111
+}

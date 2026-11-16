@@ -1,0 +1,18 @@
+import {readFile,writeFile,mkdir} from 'node:fs/promises';import assert from 'node:assert/strict';
+import {buildTrees,graphAudit,densifyRoad,toMeters,terrainHeight,buildRoadSurface,fromMeters,waterQuery,roadJunctions,pierHouseLayout} from '../public/spatial.js';
+import {DEST} from '../public/scene.js';
+const data=JSON.parse(await readFile(new URL('../public/assets/westlake.json',import.meta.url),'utf8'));
+const start=Date.now(),layout=buildTrees(data),graph=graphAudit(data),inWater=waterQuery(data);
+const encroachments=layout.trees.filter(t=>layout.index.clearance(t.c)<t.crown+1.099).length;
+assert.equal(encroachments,0,'Tree crown encroaches on the road clearance');assert.ok(layout.stats.roadside>100,'Missing roadside tree rows');
+let maxStep=0,oldBuried=0,triangles=0,nonfinite=0,belowSurface=0,renderedRoads=0,belowInterior=0;
+for(const road of data.roads){const dense=densifyRoad(road,2.5);for(let i=1;i<dense.length;i++){const a=toMeters(dense[i-1]),b=toMeters(dense[i]);maxStep=Math.max(maxStep,Math.hypot(a[0]-b[0],a[1]-b[1]));}
+ for(let i=1;i<road.c.length;i++){const a=road.c[i-1],b=road.c[i];for(let k=1;k<4;k++){const t=k/4,c=[a[0]*(1-t)+b[0]*t,a[1]*(1-t)+b[1]*t];if(terrainHeight(data,...c)>(terrainHeight(data,...a)*(1-t)+terrainHeight(data,...b)*t+.008)+.002)oldBuried++;}}
+ const mesh=buildRoadSurface(data,road,inWater);for(let t=0;t<mesh.length;t+=9){const x=(mesh[t]+mesh[t+3]+mesh[t+6])/3,z=(mesh[t+2]+mesh[t+5]+mesh[t+8])/3,y=(mesh[t+1]+mesh[t+4]+mesh[t+7])/3,c=fromMeters([x*40,z*40]);if(y<terrainHeight(data,...c)-1e-6)belowInterior++;}if(mesh.length)renderedRoads++;triangles+=mesh.length/9;for(let i=0;i<mesh.length;i+=3){if(![mesh[i],mesh[i+1],mesh[i+2]].every(Number.isFinite))nonfinite++;const c=fromMeters([mesh[i]*40,mesh[i+2]*40]);if(mesh[i+1]<terrainHeight(data,...c)+.0159)belowSurface++;}}
+assert.ok(maxStep<=2.5001);assert.equal(nonfinite,0);assert.equal(belowInterior,0);assert.equal(belowSurface,0);assert.equal(renderedRoads,data.roads.length);
+const landmarks={};for(const[key,p]of Object.entries(DEST)){const pos=toMeters(p.c);let best,dist=Infinity;for(const[id,c]of graph.coords){const q=toMeters(c),d=Math.hypot(q[0]-pos[0],q[1]-pos[1]);if(d<dist){dist=d;best=id;}}landmarks[key]={component:graph.component.get(best),snapDistanceM:Math.round(dist)};}
+const mainland=Object.entries(landmarks).filter(([k])=>!DEST[k].island);assert.equal(new Set(mainland.map(([,p])=>p.component)).size,1,'Mainland landmarks must remain connected');
+const joints=roadJunctions(data.roads),houses=pierHouseLayout(data,DEST);assert.equal(houses.length,Object.values(DEST).filter(d=>d.kind==='pier').length);for(const site of houses)assert.ok(site.clearance>=8,'Pier house blocks a road');
+const report={generatedAt:new Date().toISOString(),elapsedMs:Date.now()-start,trees:{count:layout.trees.length,...layout.stats,crownRoadConflicts:encroachments},roads:{sourceRoads:data.roads.length,renderedRoads,maxSegmentM:maxStep,triangles,invalidVertices:nonfinite,interiorsBelowTerrain:belowInterior,verticesBelowTerrain:belowSurface,oldModelBuriedSamples:oldBuried},graph:graph.summary,landmarks,note:'No synthetic graph links were added. Island components remain separate; tree rows are symbolic landscaping, not surveyed inventory.'};
+report.junctions={count:joints.length,mixedRoadAndFootpath:joints.filter(j=>j.mixed).length};report.pierHouses={count:houses.length,minimumRoadClearanceM:Math.min(...houses.map(h=>h.clearance))};
+await mkdir(new URL('../verification/',import.meta.url),{recursive:true});await writeFile(new URL('../verification/spatial.json',import.meta.url),JSON.stringify(report,null,2));console.log(JSON.stringify(report));

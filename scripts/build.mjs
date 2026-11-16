@@ -1,0 +1,26 @@
+import {gunzipSync} from 'node:zlib';
+import {navigationSignature} from './navigation-signature.mjs';
+import {readFile,writeFile,mkdir,readdir,stat} from 'node:fs/promises';
+import path from 'node:path';
+import {fileURLToPath} from 'node:url';
+const root=path.dirname(path.dirname(fileURLToPath(import.meta.url)));
+const types={'.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.json':'application/json; charset=utf-8'};
+const assets={};
+async function walk(dir,prefix=''){for(const name of (await readdir(dir)).sort()){const full=path.join(dir,name),rel=prefix+'/'+name;if((await stat(full)).isDirectory())await walk(full,rel);else assets[rel]={type:types[path.extname(name)]||'application/octet-stream',base64:(await readFile(full)).toString('base64')};}}
+const grades=JSON.parse(gunzipSync(await readFile(path.join(root,'public/assets/road-grades.json.gz'))));
+if(grades.geometrySignature!==await navigationSignature())throw Error('Road grade cache is stale; rebuild road grades before publishing.');
+const clearances=JSON.parse(await readFile(path.join(root,'public/assets/road-clearances.json'),'utf8'));
+if(clearances.geometrySignature!==await navigationSignature())throw Error('Road/model geometry changed: run node scripts/bake_road_clearances.mjs and check_ground_contact.mjs before publishing.');
+await walk(path.join(root,'public'));
+const climate=await readFile(path.join(root,'public/climate.js'),'utf8');
+const weather=await readFile(path.join(root,'public/weather-data.js'),'utf8');
+const health=(await readFile(path.join(root,'public/health.js'),'utf8')).replace(/^import .*;\r?\n/gm,'');
+const comfort=(await readFile(path.join(root,'public/comfort.js'),'utf8')).replace(/^import .*;\r?\n/gm,'');
+const metabolism=await readFile(path.join(root,'public/metabolism.js'),'utf8');
+const adviceSummary=await readFile(path.join(root,'public/advice-summary.js'),'utf8');
+const advice=(await readFile(path.join(root,'ai-health.mjs'),'utf8')).replace(/^import .*;\r?\n/gm,'');
+const api=metabolism+'\n'+health+'\n'+comfort+'\n'+adviceSummary+'\n'+advice+'\n'+climate+'\n'+weather+'\n'+(await readFile(path.join(root,'api.mjs'),'utf8')).replace(/^import .*ai-health\.mjs';\r?\n/gm,'').replace(/^(?:import|export) .* from '\.\/public\/(?:climate|weather-data)\.js';\r?\n/gm,'');
+const worker=api+'\nconst ASSETS='+JSON.stringify(assets)+';\nexport default {async fetch(request,env){const url=new URL(request.url);if(url.pathname.startsWith("/api/"))return api(request,env);if(!["GET","HEAD"].includes(request.method))return new Response("Method not allowed",{status:405});const item=ASSETS[url.pathname==="/"?"/index.html":url.pathname];if(!item)return new Response("Not found",{status:404});const bytes=Uint8Array.from(atob(item.base64),c=>c.charCodeAt(0));return new Response(request.method==="HEAD"?null:bytes,{headers:{"content-type":item.type,"cache-control":/\\.(glb|webp)$/.test(url.pathname)?"public, max-age=86400":"no-cache","x-content-type-options":"nosniff"}});}};\n';
+await mkdir(path.join(root,'dist/server'),{recursive:true});await mkdir(path.join(root,'dist/.openai'),{recursive:true});
+await writeFile(path.join(root,'dist/server/index.js'),worker);await writeFile(path.join(root,'dist/.openai/hosting.json'),await readFile(path.join(root,'.openai/hosting.json')));
+console.log('Worker built: '+Object.keys(assets).length+' embedded assets, '+Buffer.byteLength(worker)+' bytes');

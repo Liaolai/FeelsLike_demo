@@ -1,0 +1,197 @@
+{
+  "checkedAt": 1794739050066,
+  "weather": {
+    "provider": "Open-Meteo",
+    "status": "ok",
+    "lastHttpStatus": 200,
+    "lastAttemptAt": 1794739046971,
+    "lastSuccessAt": 1794739050066,
+    "cacheSeconds": 600,
+    "uniqueGridCount": 1,
+    "points": [
+      {
+        "id": "north",
+        "requested": {
+          "lat": 30.264,
+          "lon": 120.145
+        },
+        "returned": {
+          "lat": 30.263618,
+          "lon": 120.14051
+        },
+        "validTime": 1794738600000,
+        "ageMinutes": 8,
+        "currentFields": 10,
+        "hourlyFields": 12,
+        "hourlySamples": 72,
+        "stale": false
+      },
+      {
+        "id": "south",
+        "requested": {
+          "lat": 30.231,
+          "lon": 120.145
+        },
+        "returned": {
+          "lat": 30.263618,
+          "lon": 120.14051
+        },
+        "validTime": 1794738600000,
+        "ageMinutes": 8,
+        "currentFields": 10,
+        "hourlyFields": 12,
+        "hourlySamples": 72,
+        "stale": false
+      },
+      {
+        "id": "west",
+        "requested": {
+          "lat": 30.249,
+          "lon": 120.123
+        },
+        "returned": {
+          "lat": 30.263618,
+          "lon": 120.14051
+        },
+        "validTime": 1794738600000,
+        "ageMinutes": 8,
+        "currentFields": 10,
+        "hourlyFields": 12,
+        "hourlySamples": 72,
+        "stale": false
+      }
+    ],
+    "error": null
+  },
+  "tjweather": {
+    "status": "credentials_not_configured"
+  },
+  "crowd": {
+    "status": "not_connected"
+  },
+  "elapsedMs": 3096,
+  "requiredCurrent": [
+    "temperature_2m",
+    "relative_humidity_2m",
+    "apparent_temperature",
+    "precipitation",
+    "weather_code",
+    "cloud_cover",
+    "wind_speed_10m",
+    "wind_direction_10m",
+    "wind_gusts_10m",
+    "is_day"
+  ],
+  "requiredHourly": [
+    "temperature_2m",
+    "relative_humidity_2m",
+    "apparent_temperature",
+    "precipitation",
+    "weather_code",
+    "cloud_cover",
+    "wind_speed_10m",
+    "wind_direction_10m",
+    "wind_gusts_10m",
+    "shortwave_radiation",
+    "uv_index",
+    "precipitation_probability"
+  ],
+  "samples": [
+    {
+      "latitude": 30.263618,
+      "longitude": 120.14051,
+      "current": {
+        "time": 1794738600,
+        "interval": 900,
+        "temperature_2m": 16.7,
+        "relative_humidity_2m": 78,
+        "apparent_temperature": 16.6,
+        "precipitation": 0,
+        "weather_code": 3,
+        "cloud_cover": 100,
+        "wind_speed_10m": 1.73,
+        "wind_direction_10m": 10,
+        "wind_gusts_10m": 3.6,
+        "is_day": 0
+      },
+      "units": {
+        "time": "unixtime",
+        "interval": "seconds",
+        "temperature_2m": "°C",
+        "relative_humidity_2m": "%",
+        "apparent_temperature": "°C",
+        "precipitation": "mm",
+        "weather_code": "wmo code",
+        "cloud_cover": "%",
+        "wind_speed_10m": "m/s",
+        "wind_direction_10m": "°",
+        "wind_gusts_10m": "m/s",
+        "is_day": ""
+      }
+    },
+    {
+      "latitude": 30.263618,
+      "longitude": 120.14051,
+      "current": {
+        "time": 1794738600,
+        "interval": 900,
+        "temperature_2m": 16.7,
+        "relative_humidity_2m": 78,
+        "apparent_temperature": 16.6,
+        "precipitation": 0,
+        "weather_code": 3,
+        "cloud_cover": 100,
+        "wind_speed_10m": 1.73,
+        "wind_direction_10m": 10,
+        "wind_gusts_10m": 3.6,
+        "is_day": 0
+      },
+      "units": {
+        "time": "unixtime",
+        "interval": "seconds",
+        "temperature_2m": "°C",
+        "relative_humidity_2m": "%",
+        "apparent_temperature": "°C",
+        "precipitation": "mm",
+        "weather_code": "wmo code",
+        "cloud_cover": "%",
+        "wind_speed_10m": "m/s",
+        "wind_direction_10m": "°",
+        "wind_gusts_10m": "m/s",
+        "is_day": ""
+      }
+    },
+    {
+      "latitude": 30.263618,
+      "longitude": 120.14051,
+      "current": {
+        "time": 1794738600,
+        "interval": 900,
+        "temperature_2m": 16.7,
+        "relative_humidity_2m": 78,
+        "apparent_temperature": 16.6,
+        "precipitation": 0,
+        "weather_code": 3,
+        "cloud_cover": 100,
+        "wind_speed_10m": 1.73,
+        "wind_direction_10m": 10,
+        "wind_gusts_10m": 3.6,
+        "is_day": 0
+      },
+      "units": {
+        "time": "unixtime",
+        "interval": "seconds",
+        "temperature_2m": "°C",
+        "relative_humidity_2m": "%",
+        "apparent_temperature": "°C",
+        "precipitation": "mm",
+        "weather_code": "wmo code",
+        "cloud_cover": "%",
+        "wind_speed_10m": "m/s",
+        "wind_direction_10m": "°",
+        "wind_gusts_10m": "m/s",
+        "is_day": ""
+      }
+    }
+  ]
+}

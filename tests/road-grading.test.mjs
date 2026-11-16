@@ -1,0 +1,9 @@
+import test from 'node:test';import assert from 'node:assert/strict';import * as T from '../public/assets/three.module.js';import {gradeRoadSurfaces} from '../public/road-grading.js';import {createWalkSurface} from '../public/walk-surface.js';import {createGroundContact} from '../public/ground-contact.js';
+test('grade repair preserves every source edge and makes an abrupt real deck join walkable',()=>{
+ const root=new T.Group();root.scale.setScalar(2.5);const low=new T.Mesh(new T.PlaneGeometry(.2,.04,40,1).rotateX(-Math.PI/2));low.position.set(-.1,.06,0);const high=low.clone();high.geometry=low.geometry.clone();high.position.set(.1,.13,0);root.add(low,high);root.updateMatrixWorld(true);
+ const nodes=[-.2,0,.2].map((x,i)=>({x,z:0,id:i})),edges=[{a:nodes[0],b:nodes[1],length:.2},{a:nodes[1],b:nodes[2],length:.2}],landscape={roadMeshes:[low,high]};gradeRoadSurfaces(root,landscape,{nodes,edges},createWalkSurface(landscape.roadMeshes));assert.equal(edges.length,2);
+ const deck=createWalkSurface(landscape.roadMeshes,.125,{topsOnly:true}),contact=createGroundContact(deck),start={x:-.49,y:deck.height(-.49,0)+.0005,z:0};assert.equal(contact.trace(start,{x:.49,y:0,z:0}).ok,true);
+});
+test('a depressed dry approach is physically raised above the lake datum',()=>{
+ const root=new T.Group();root.scale.setScalar(2.5);const road=new T.Mesh(new T.PlaneGeometry(.1,.02,10,1).rotateX(-Math.PI/2));road.position.y=-.15;root.add(road);root.updateMatrixWorld(true);const nodes=[{id:0,x:-.05,z:0},{id:1,x:.05,z:0}],edges=[{a:nodes[0],b:nodes[1],length:.1}],landscape={roadMeshes:[road]};gradeRoadSurfaces(root,landscape,{nodes,edges},createWalkSurface([road]));const deck=createWalkSurface(landscape.roadMeshes);assert.ok(deck.height(0,0)>.125);assert.ok(road.geometry.attributes.position.getY(5)>-.01);
+});

@@ -1,0 +1,20 @@
+{
+  "passed": true,
+  "actual": {
+    "paths": 2351,
+    "nodes": 15565,
+    "edges": 16271
+  },
+  "reference": {
+    "paths": 2351,
+    "nodes": 15565,
+    "edges": 16271
+  },
+  "allSourcePathPoints": 18537,
+  "maxHeightErrorSceneUnits": 0,
+  "landmarkErrors": [],
+  "restoredDonorNavigation": true,
+  "limits": [
+    "Preserving donor navigation is not a full physical collider or GPU visual acceptance."
+  ]
+}

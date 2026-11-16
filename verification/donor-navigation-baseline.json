@@ -1,0 +1,221 @@
+{
+  "scope": "Unmodified donor geometry and navigation, import/fetch path adaptation only; same destination inputs as host adapter. Not a collider or rendering acceptance.",
+  "paths": 2351,
+  "nodes": 15565,
+  "edges": 16271,
+  "components": [
+    13738,
+    207,
+    147,
+    129,
+    113,
+    96,
+    75,
+    74,
+    52,
+    49,
+    47,
+    46,
+    41,
+    39,
+    37,
+    31,
+    30,
+    29,
+    28,
+    28,
+    27,
+    27,
+    26,
+    21,
+    20,
+    18,
+    18,
+    18,
+    17,
+    17,
+    16,
+    15,
+    14,
+    13,
+    13,
+    13,
+    12,
+    12,
+    12,
+    10,
+    8,
+    8,
+    8,
+    8,
+    7,
+    7,
+    7,
+    7,
+    6,
+    6,
+    6,
+    6,
+    6,
+    6,
+    5,
+    5,
+    5,
+    5,
+    4,
+    4,
+    4,
+    4,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2
+  ],
+  "destinations": [
+    {
+      "key": "bridge",
+      "name": "断桥残雪",
+      "distanceM": 3.54526528166558,
+      "component": 725,
+      "main": true
+    },
+    {
+      "key": "sudi",
+      "name": "苏堤春晓",
+      "distanceM": 10.824783668487106,
+      "component": 725,
+      "main": true
+    },
+    {
+      "key": "leifeng",
+      "name": "雷峰塔",
+      "distanceM": 39.200058065851046,
+      "component": 725,
+      "main": true
+    },
+    {
+      "key": "quyuan",
+      "name": "曲院风荷",
+      "distanceM": 5.935017929794874,
+      "component": 725,
+      "main": true
+    },
+    {
+      "key": "huagang",
+      "name": "花港观鱼",
+      "distanceM": 4.159088628304085,
+      "component": 725,
+      "main": true
+    },
+    {
+      "key": "willow",
+      "name": "柳浪闻莺",
+      "distanceM": 30.15707430205295,
+      "component": 725,
+      "main": true
+    },
+    {
+      "key": "autumn",
+      "name": "平湖秋月",
+      "distanceM": 10.628297474862112,
+      "component": 725,
+      "main": true
+    },
+    {
+      "key": "gushan",
+      "name": "孤山",
+      "distanceM": 21.563045089970274,
+      "component": 725,
+      "main": true
+    },
+    {
+      "key": "santan",
+      "name": "三潭印月",
+      "distanceM": 80.47200320537392,
+      "component": 1624,
+      "main": false
+    },
+    {
+      "key": "pierErpark",
+      "name": "二公园码头",
+      "distanceM": 10.186301022638308,
+      "component": 725,
+      "main": true
+    },
+    {
+      "key": "pierFivepark",
+      "name": "五公园码头",
+      "distanceM": 5.023902493403621,
+      "component": 725,
+      "main": true
+    },
+    {
+      "key": "pierYouth",
+      "name": "少年宫码头",
+      "distanceM": 3.5086706213230916,
+      "component": 725,
+      "main": true
+    },
+    {
+      "key": "pierZhongshan",
+      "name": "中山公园码头",
+      "distanceM": 18.500888193587183,
+      "component": 725,
+      "main": true
+    },
+    {
+      "key": "pierYuemiao",
+      "name": "岳庙码头",
+      "distanceM": 9.753988602430244,
+      "component": 725,
+      "main": true
+    },
+    {
+      "key": "pierHuagang",
+      "name": "花港码头",
+      "distanceM": 1.0183794918478242,
+      "component": 725,
+      "main": true
+    },
+    {
+      "key": "pierQianwang",
+      "name": "钱王祠码头",
+      "distanceM": 24.033732122527084,
+      "component": 725,
+      "main": true
+    },
+    {
+      "key": "pierRowing",
+      "name": "手划船码头",
+      "distanceM": 51.708539848574084,
+      "component": 725,
+      "main": true
+    },
+    {
+      "key": "pierSantan",
+      "name": "三潭印月码头",
+      "distanceM": 23.7410785794072,
+      "component": 1624,
+      "main": false
+    }
+  ]
+}

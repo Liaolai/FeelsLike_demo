@@ -1,0 +1,13 @@
+node_modules/
+*.zip
+*.log
+.DS_Store
+
+.asset-tools/
+
+.env
+.env.*
+!.env.example
+
+verification/donor-baseline/
+verification/donor-sandbox-reference.txt

@@ -1,0 +1,124 @@
+{
+  "generatedAt": "2026-11-15T08:55:28.133Z",
+  "elapsedMs": 6688,
+  "trees": {
+    "count": 14421,
+    "rejectedRoad": 4599,
+    "rejectedWater": 367,
+    "rejectedBuilding": 1661,
+    "roadside": 12678,
+    "park": 1743,
+    "crownRoadConflicts": 0
+  },
+  "roads": {
+    "sourceRoads": 2545,
+    "renderedRoads": 2545,
+    "maxSegmentM": 2.4999610359039797,
+    "triangles": 725614,
+    "invalidVertices": 0,
+    "interiorsBelowTerrain": 0,
+    "verticesBelowTerrain": 0,
+    "oldModelBuriedSamples": 3733
+  },
+  "graph": {
+    "nodes": 15407,
+    "components": 19,
+    "largestComponents": [
+      15013,
+      207,
+      46,
+      36,
+      17,
+      14,
+      12,
+      7,
+      7,
+      7
+    ],
+    "duplicateSegments": 8,
+    "zeroSegments": 0
+  },
+  "landmarks": {
+    "bridge": {
+      "component": 0,
+      "snapDistanceM": 4
+    },
+    "sudi": {
+      "component": 0,
+      "snapDistanceM": 158
+    },
+    "leifeng": {
+      "component": 0,
+      "snapDistanceM": 39
+    },
+    "quyuan": {
+      "component": 0,
+      "snapDistanceM": 6
+    },
+    "huagang": {
+      "component": 0,
+      "snapDistanceM": 4
+    },
+    "willow": {
+      "component": 0,
+      "snapDistanceM": 31
+    },
+    "autumn": {
+      "component": 0,
+      "snapDistanceM": 13
+    },
+    "gushan": {
+      "component": 0,
+      "snapDistanceM": 22
+    },
+    "santan": {
+      "component": 1,
+      "snapDistanceM": 81
+    },
+    "pierErpark": {
+      "component": 0,
+      "snapDistanceM": 14
+    },
+    "pierFivepark": {
+      "component": 0,
+      "snapDistanceM": 9
+    },
+    "pierYouth": {
+      "component": 0,
+      "snapDistanceM": 4
+    },
+    "pierZhongshan": {
+      "component": 0,
+      "snapDistanceM": 19
+    },
+    "pierYuemiao": {
+      "component": 0,
+      "snapDistanceM": 10
+    },
+    "pierHuagang": {
+      "component": 0,
+      "snapDistanceM": 12
+    },
+    "pierQianwang": {
+      "component": 0,
+      "snapDistanceM": 6
+    },
+    "pierRowing": {
+      "component": 0,
+      "snapDistanceM": 54
+    },
+    "pierSantan": {
+      "component": 1,
+      "snapDistanceM": 24
+    }
+  },
+  "note": "No synthetic graph links were added. Island components remain separate; tree rows are symbolic landscaping, not surveyed inventory.",
+  "junctions": {
+    "count": 3234,
+    "mixedRoadAndFootpath": 581
+  },
+  "pierHouses": {
+    "count": 9,
+    "minimumRoadClearanceM": 8.256315692633494
+  }
+}

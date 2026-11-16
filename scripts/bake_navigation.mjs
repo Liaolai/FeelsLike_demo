@@ -1,0 +1,10 @@
+import {readFile,writeFile} from 'node:fs/promises';
+import {fileURLToPath} from 'node:url';
+import {navigationSignature} from './navigation-signature.mjs';
+globalThis.ProgressEvent=class{constructor(type,props){Object.assign(this,{type},props);}};
+globalThis.fetch=async input=>{const url=input?.url||String(input);if(!url.startsWith('file:'))throw Error('Only local assets are allowed');const bytes=await readFile(fileURLToPath(url));return new Response(bytes,{headers:{'content-length':String(bytes.length)}});};
+const {loadPartnerScene}=await import('../public/partner-scene.js');
+const started=performance.now(),p=await loadPartnerScene({deferShade:true,bake:true,onProgress:m=>console.log(Math.round((performance.now()-started)/1000)+'s '+m)});
+const r=n=>Number(n.toFixed(7));
+const data={schema:1,geometrySignature:await navigationSignature(),created:new Date().toISOString(),mainComponent:p.network.mainComponent,nodes:p.network.nodes.map(n=>[n.id,r(n.x),r(n.z),n.worldY==null?null:r(n.worldY),n.component]),edges:p.network.edges.filter(e=>!e.inactive).flatMap(e=>[e.a.id,e.b.id]),connectors:p.connectors,targets:p.navigationTargets,diagnostics:p.navigationDiagnostics};
+await writeFile('public/assets/walk-navigation.json',JSON.stringify(data));console.log(JSON.stringify({seconds:(performance.now()-started)/1000,nodes:data.nodes.length,edges:data.edges.length/2,...data.diagnostics}));

@@ -1,0 +1,3 @@
+import {writeFile,mkdir} from 'node:fs/promises';import {getWeather,weatherDiagnostics,FIELDS,HOURLY} from '../api.mjs';
+const start=Date.now(),cache=await getWeather(true),report={...weatherDiagnostics(cache),elapsedMs:Date.now()-start,requiredCurrent:FIELDS,requiredHourly:HOURLY,samples:cache?.points.map(p=>({latitude:p.latitude,longitude:p.longitude,current:p.current,units:p.current_units}))||[]};
+await mkdir(new URL('../verification/',import.meta.url),{recursive:true});await writeFile(new URL('../verification/api.json',import.meta.url),JSON.stringify(report,null,2));console.log(JSON.stringify(report));if(report.weather.status!=='ok')process.exitCode=1;

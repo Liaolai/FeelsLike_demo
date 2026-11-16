@@ -1,0 +1,2 @@
+import test from 'node:test';import assert from 'node:assert/strict';import {shortestRoute} from '../public/route-search.js';
+test('routes traverse a complete large road graph and cannot cross disconnected islands',()=>{const nodes=new Map(),edges=new Map();for(let i=0;i<45001;i++){nodes.set(i,{position:{x:i,y:0,z:0}});edges.set(i,new Set([i-1,i+1].filter(n=>n>=0&&n<=45000)));}nodes.set('island',{position:{x:4,y:0,z:2}});assert.equal(shortestRoute(nodes,edges,0,45000).length,45000);assert.deepEqual(shortestRoute(nodes,edges,0,'island'),[]);});

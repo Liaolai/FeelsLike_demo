@@ -1,0 +1,4 @@
+import test from 'node:test';import assert from 'node:assert/strict';import {createNavigationGuard} from '../public/navigation-rebuild.js';
+const body={radius:.22/40,blocked:()=>false};
+test('continuous slope 1.11 remains walkable while a genuine height jump is rejected',()=>{const slope=createNavigationGuard({height:(x,z)=>x*1.11},body);assert.equal(slope.canWalk({x:0,z:0},{x:1/40,z:0}),true);const step=createNavigationGuard({height:(x,z)=>x<.5/40?0:.4/40},body);assert.equal(step.evaluate({x:0,z:0},{x:1/40,z:0}).reason,'height-step');});
+test('larger slope tolerance does not allow lake gaps or body collisions',()=>{const lake=createNavigationGuard({height:(x,z)=>x>.4/40&&x<.8/40?null:0},body);assert.equal(lake.canWalk({x:0,z:0},{x:1/40,z:0}),false);const wall=createNavigationGuard({height:()=>0},{...body,blocked:p=>p.x>.4/40&&p.x<.8/40});assert.equal(wall.evaluate({x:0,z:0},{x:1/40,z:0}).reason,'body-collision');});

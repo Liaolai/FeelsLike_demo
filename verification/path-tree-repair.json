@@ -1,0 +1,62 @@
+{
+  "bridgeSamples": 85,
+  "unsupported": 0,
+  "maxBridgeHeightErrorM": 2.3470336785180734e-10,
+  "roadCoverage": [
+    {
+      "name": "断桥南端",
+      "hasVisibleDeck": true
+    },
+    {
+      "name": "断桥北端",
+      "hasVisibleDeck": true
+    },
+    {
+      "name": "苏堤北端",
+      "hasVisibleDeck": true
+    },
+    {
+      "name": "苏堤南端",
+      "hasVisibleDeck": true
+    },
+    {
+      "name": "断桥中部",
+      "hasVisibleDeck": true
+    },
+    {
+      "name": "苏堤中部",
+      "hasVisibleDeck": true
+    }
+  ],
+  "components": [
+    25476,
+    1209,
+    412,
+    307,
+    207,
+    147,
+    123,
+    113
+  ],
+  "stitched": 12,
+  "crossings": [
+    {
+      "from": "断桥南端",
+      "to": "断桥北端",
+      "connected": true
+    },
+    {
+      "from": "苏堤北端",
+      "to": "苏堤南端",
+      "connected": true
+    },
+    {
+      "from": "断桥南端",
+      "to": "苏堤北端",
+      "connected": true
+    }
+  ],
+  "trunks": 42390,
+  "maxRootGapM": 0.00006931665088583117,
+  "maxRootDepthM": -0.1006210436823557
+}

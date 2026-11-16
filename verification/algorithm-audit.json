@@ -1,0 +1,96 @@
+{
+  "date": "2026-11-15",
+  "timezone": "Asia/Shanghai",
+  "testsPassed": 60,
+  "weather": {
+    "provider": "Open-Meteo",
+    "httpStatus": 200,
+    "currentFields": 10,
+    "hourlyFields": 12,
+    "hourlySamplesPerPoint": 72,
+    "requestedPoints": 3,
+    "uniqueReturnedGridCount": 1,
+    "status": "ok"
+  },
+  "healthChoices": [
+    "健康",
+    "感冒",
+    "心脏病",
+    "高血压",
+    "糖尿病",
+    "肾脏疾病",
+    "其他（自填写）"
+  ],
+  "liveDataNotConnected": [
+    "tjweather",
+    "景区今日客流"
+  ],
+  "checked": [
+    "气象字段与单位",
+    "当前数据时效",
+    "冷热规则一致性",
+    "多天气提醒并存",
+    "体感反馈有效期与异步覆盖",
+    "未来24小时预报窗口",
+    "Mifflin–St Jeor公式与单位换算",
+    "米制距离选择",
+    "健康互斥和自填内容",
+    "健康信息不进入遥测",
+    "部署包共享模块",
+    "健康入口页面交互",
+    "现场测温公式与时空有效性",
+    "原始预报不被主观冷热改写",
+    "健康影响提醒计时",
+    "六档穿搭与附加条件",
+    "九种人物身高和关节",
+    "人物选择与试穿页面交互",
+    "手机地图控件折叠与遮挡",
+    "3D与气温/体感彩图切换",
+    "格点合并、数据时效与色标"
+  ],
+  "browserHealthFormVerified": true,
+  "scope": "Code and integration audit; personal heat-risk accuracy requires field validation.",
+  "avatars": 9,
+  "activePeople": 1,
+  "localObservation": {
+    "maxAgeMinutes": 30,
+    "radiusMetres": 100,
+    "uploaded": false
+  },
+  "reminderIntervalsMinutes": [
+    15,
+    30
+  ],
+  "latestVersion": "pending_publication",
+  "temperatureMap": {
+    "provider": "Open-Meteo",
+    "currentUniqueGrids": 1,
+    "streetLevel": false,
+    "fixedScaleCelsius": [
+      -10,
+      40
+    ],
+    "measures": [
+      "air",
+      "forecast_apparent_temperature"
+    ]
+  },
+  "mobileLayoutVerified": true,
+  "weatherTransport": {
+    "primary": "browser_direct",
+    "fallback": "service",
+    "cacheMinutes": 10,
+    "retryAfterRespected": true,
+    "originalProductionFailure": "HTTP 429"
+  },
+  "avatarSource": "actual user-supplied GLB",
+  "avatarBones": 41,
+  "avatarClips": [
+    "idle",
+    "walk",
+    "run",
+    "turn",
+    "defeat_03",
+    "jump"
+  ]
+}

@@ -1,0 +1,5 @@
+import test from 'node:test';import assert from 'node:assert/strict';import {estimateMetabolism as estimate} from '../public/metabolism.js';
+test('published male and female coefficients produce expected kcal/day and watts',()=>{const p={heightCm:178,weightKg:70,age:30};const m=estimate({...p,sex:'male'}),f=estimate({...p,sex:'female'});assert.equal(m.kcalPerDay[0],1667.5);assert.equal(f.kcalPerDay[0],1501.5);assert.equal(m.watts[0],1667.5*4184/86400);});
+test('not specifying a sex coefficient shows a range without guessing',()=>{const p=estimate({heightCm:178,weightKg:70,age:30});assert.deepEqual(p.kcalPerDay,[1501.5,1667.5]);assert.equal(p.range,true);});
+test('empty input never creates a default body profile',()=>{for(const x of [null,{}, {heightCm:'',weightKg:70,age:30}])assert.equal(estimate(x).status,'incomplete');});
+test('reference-age boundary and invalid values are explicit',()=>{for(const age of [12,80])assert.equal(estimate({heightCm:170,weightKg:65,age}).status,'outside_reference_age');for(const weightKg of [-10,Infinity,351])assert.notEqual(estimate({heightCm:170,weightKg,age:30}).status,'ok');});

@@ -1,0 +1,107 @@
+{
+  "source": "actual rendered surfaces and original unpruned OSM graph",
+  "paths": 2351,
+  "nodes": 15565,
+  "unsafeNodes": 0,
+  "reverseFailures": {},
+  "reverseExamples": [],
+  "edges": 16271,
+  "points": 347913,
+  "missing": 0,
+  "underwaterRejected": 0,
+  "outsideSceneMissing": 0,
+  "collision": 0,
+  "collisionByKind": {},
+  "collisionByName": {},
+  "missingExamples": [],
+  "transitionFailures": {},
+  "transitionExamples": [],
+  "maxTerrainPenetrationM": 0,
+  "terrainIntersections": 0,
+  "maxFootErrorM": 0,
+  "maxDeckJumpM": 0.9152136300416869,
+  "approaches": [
+    {
+      "name": "苏堤",
+      "spanM": 50,
+      "startRaiseM": 2.9318077722576827,
+      "endRaiseM": 1.9324932826574257
+    },
+    {
+      "name": "杨公堤",
+      "spanM": 50,
+      "startRaiseM": 5.086822520670123,
+      "endRaiseM": 4.431027580332095
+    }
+  ],
+  "sudiNorth": {
+    "heightDifferenceM": 0.6185739265781343,
+    "movement": {
+      "ok": true,
+      "position": {
+        "x": -26.835117033321296,
+        "y": 0.40675152588680696,
+        "z": -16.567481938331678
+      }
+    }
+  },
+  "city": {
+    "pavingAboveTerrainM": 0.19197803722863505,
+    "feetVsPavingM": 0
+  },
+  "assetErrors": [],
+  "targets": {
+    "bridge": {
+      "nodeId": 1175,
+      "position": [
+        13.01665100000065,
+        0.16043937230095492,
+        -37.613358199998025
+      ],
+      "anchor": [
+        12.934470000016347,
+        0,
+        -37.656773000001124
+      ],
+      "distanceM": 3.7107329954415214,
+      "component": 725,
+      "feetHeightM": 6.417574892038197
+    },
+    "sudi": {
+      "nodeId": 831,
+      "position": [
+        -19.073837888883467,
+        0.1705499951839447,
+        11.496603922225352
+      ],
+      "anchor": [
+        -18.773899999999912,
+        0,
+        11.577280000006635
+      ],
+      "distanceM": 12.39594292184411,
+      "component": 725,
+      "feetHeightM": 6.821999807357788
+    },
+    "autumn": {
+      "nodeId": 14648,
+      "position": [
+        -1.2529590000011126,
+        0.15514730030386992,
+        -17.312486399993585
+      ],
+      "anchor": [
+        -0.932669999974109,
+        0,
+        -17.260165999995166
+      ],
+      "distanceM": 12.95081773760475,
+      "component": 725,
+      "feetHeightM": 6.205892012154797
+    }
+  },
+  "collisionExamples": [],
+  "seconds": 72.38127060000001,
+  "passed": true,
+  "corePassed": true
+}
