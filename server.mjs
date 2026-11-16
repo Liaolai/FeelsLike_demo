@@ -6,6 +6,8 @@ import {fileURLToPath} from 'node:url';
 import {api,getWeather,telemetry} from './api.mjs';
 const root=path.join(path.dirname(fileURLToPath(import.meta.url)),'public');
 const port=Number(process.env.PORT||8791);
+// 云平台（Render 等）要求绑定 0.0.0.0 才能从外部访问；本地仍可用 127.0.0.1 打开。
+const host=process.env.HOST||'0.0.0.0';
 const types={'.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.mjs':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.json':'application/json; charset=utf-8','.png':'image/png','.svg':'image/svg+xml','.glb':'model/gltf-binary','.webp':'image/webp'};
 // Each stream contains only the virtual positions supplied by its own browser.
 const streams=new Map();
@@ -13,7 +15,11 @@ const gzCache=new Map();
 async function tick(){const cache=await getWeather();for(const [res,people]of streams){try{res.write('data: '+JSON.stringify(telemetry(cache,people))+'\n\n');}catch{streams.delete(res);}}}
 const service=http.createServer(async(req,res)=>{
  try{
- const url=new URL(req.url,'http://localhost:'+port);
+ // 用真实请求头还原 origin：反代/云平台后面 origin 是 https://<域名>；
+ // 若写死 localhost，ai-health.mjs 的同源校验会把线上健康 AI 一律判 403。
+ const proto=(req.headers['x-forwarded-proto']||'http').split(',')[0].trim();
+ const hostHeader=(req.headers['x-forwarded-host']||req.headers.host||'localhost:'+port).split(',')[0].trim();
+ const url=new URL(req.url,proto+'://'+hostHeader);
  if(url.pathname==='/api/health'){res.writeHead(200,{'content-type':'application/json'});res.end(JSON.stringify({ok:true,sse:true,backgroundIntervalSeconds:5}));return;}
  if(url.pathname==='/api/events'){
   let people;try{people=JSON.parse(url.searchParams.get('people')||'[]');telemetry(null,people);}catch{res.writeHead(400).end('Invalid people');return;}
@@ -33,6 +39,6 @@ const service=http.createServer(async(req,res)=>{
  res.writeHead(200,headers);res.end(req.method==='HEAD'?undefined:body);
  }catch{res.writeHead(404).end('Not found');}
 });
-service.listen(port,'127.0.0.1',()=>console.log('Local: http://127.0.0.1:'+port));
+service.listen(port,host,()=>console.log('Listening on http://'+host+':'+port+(host==='0.0.0.0'?'  (本地打开 http://127.0.0.1:'+port+')':'')));
 const timer=setInterval(()=>void tick(),5000);timer.unref();void getWeather();
 for(const signal of ['SIGINT','SIGTERM'])process.on(signal,()=>{clearInterval(timer);for(const r of streams.keys())r.end();service.close(()=>process.exit(0));});
